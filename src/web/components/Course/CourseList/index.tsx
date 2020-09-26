@@ -2,48 +2,33 @@ import  React,{useState,useEffect} from 'react';
 import ListView from './ListView'
 
 import './course.css'
-import '../../../assets/audition/css/animate.min.css'
+import '@assets/audition/css/animate.min.css'
 interface ICourse{
     title:String,
-    desc1:String,
-    desc2:String,
-    desc3:string,
-    courseUrl:string
+    desc:String
 }
 
 const CourseList:React.FunctionComponent=()=>{
-    const initState:Array<ICourse>= [{
-        title:'React',
-        desc1:'React是Facebook开发的一款JS库,当下必须学到的技术',
-        desc2:'课程中的部分由入门到应用，再到原理，源码由浅入深，快速对一门技术掌握',
-        desc3:'公司招聘不可缺少的技能',
-        courseUrl:'href'
-    },{
-        title:'vue',
-        desc1:'React是Facebook开发的一款JS库,当下必须学到的技术',
-        desc2:'课程中的部分由入门到应用，再到原理，源码由浅入深，快速对一门技术掌握',
-        desc3:'公司招聘不可缺少的技能',
-        courseUrl:'href'
-    }]
-    var _in:Array<string> = ['bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp','fadeIn','fadeInDown','fadeInDownBig','fadeInLeft','fadeInLeftBig','fadeInRight','fadeInRightBig','fadeInUp','fadeInUpBig','rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight','slideInDown','slideInLeft','slideInRight'];
-    var _out:Array<string> = ['bounceOut','bounceOutDown','bounceOutLeft','bounceOutRight','bounceOutUp','fadeOut','fadeOutDown','fadeOutDownBig','fadeOutLeft','fadeOutLeftBig','fadeOutRight','fadeOutRightBig','fadeOutUp','fadeOutUpBig','rotateOut','rotateOutDownLeft','rotateOutDownRight','rotateOutUpLeft','rotateOutUpRight','slideOutDown','slideOutLeft','slideOutRight'];
-     
+    const _in:Array<string> = ['bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp','fadeIn','fadeInDown','fadeInDownBig','fadeInLeft','fadeInLeftBig','fadeInRight','fadeInRightBig','fadeInUp','fadeInUpBig','rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight','slideInDown','slideInLeft','slideInRight'];
+    const _out:Array<string> = ['bounceOut','bounceOutDown','bounceOutLeft','bounceOutRight','bounceOutUp','fadeOut','fadeOutDown','fadeOutDownBig','fadeOutLeft','fadeOutLeftBig','fadeOutRight','fadeOutRightBig','fadeOutUp','fadeOutUpBig','rotateOut','rotateOutDownLeft','rotateOutDownRight','rotateOutUpLeft','rotateOutUpRight','slideOutDown','slideOutLeft','slideOutRight'];
+    const [courseDesc,setCourse]=useState<ICourse>({title:'React',desc:'Facebook的开源框架React.js，基于Virtual DOM重新定义了用户界面的开发方式，彻底革新了大家对前端框架的认识，将PHP风格的开发方式迁移到客户端应用开发。其优势在于可以与各种类库、框架搭配使用'});    
     const [animateClass,setAnimateClass]=useState<string>('');
-    const [displayIndex,setIndex]=useState<number>(0)
     useEffect(()=>{
-        setInterval(()=>{
+        listenerClickHandle()
+    },[])
+    const listenerClickHandle=()=>{
+        window.addEventListener("getCourseDesc", function (e) {
             var rand_in:number = Math.round(Math.random() * _in.length);
             var rand_out:number = Math.round(Math.random() * _out.length);
+            setAnimateClass(_out[rand_out])
             setAnimateClass(_in[rand_in])
-            setIndex(parseInt(Math.random() * initState.length+''))
-            setTimeout(()=>{
-                setAnimateClass(_out[rand_out])
-            },3000)
-        },3000)
-    },[])
-    const [courseArray]=useState<Array<ICourse>>(initState);
+            let item=JSON.parse(localStorage.getItem("courseItem"))
+            console.log(item)
+            setCourse(item);
+        })
+    }
     return  ( <div className={`course-list_container animated ${animateClass}`}>
-                    <ListView   list={courseArray[displayIndex]}></ListView>
+                    <ListView   list={courseDesc}></ListView>
                 </div>
             )
 }

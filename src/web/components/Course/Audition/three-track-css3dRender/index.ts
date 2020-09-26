@@ -3,131 +3,18 @@ import TrackballControls from './three-trackball';
 import * as THREE from 'three';
 import TWEEN from '@tweenjs/tween.js';
 import { CSS3DRenderer, CSS3DObject } from './CSS3DRenderer';
+import personArray from './courses'
 
 export default function auditionAnimate() {
 
-  const personArray = [
-    'angular.png',
-    'jekins.png',
-    'json.png',
-    '15_47c47e3.png',
-    '16_5149105.png',
-    '17_6dac3bd.png',
-    '18_061ddaf.png',
-    '19_641febd.png',
-    '1_2058a2b.png',
-    '20_4f81b9b.png',
-    '22_da029aa.png',
-    '23_034e7e8.png',
-    '24_60b405b.png',
-    '25_c0f0200.png',
-    '26_335bb13.png',
-    '27_b478ad5.png',
-    '28_03e8c6f.png',
-    '29_fef0d05.png',
-    '2_1ee2e6c.png',
-    '30_af2896e.png',
-    '31_3f91ebd.png',
-    '32_88c4f11.png',
-    '33_edd4f7d.png',
-    '34_38d61ac.png',
-    '36_f619572.png',
-    '37_a025f92.png',
-    '38_377dd47.png',
-    '39_31f5eb1.png',
-    '3_8dde7c4.png',
-    '40_538e40e.png',
-    '41_d07ef7b.png',
-    '42_d3d3f41.png',
-    '43_ec8008a.png',
-    '44_7d907d8.png',
-    '45_a38abb2.png',
-    '46_95eaf9d.png',
-    '47_1e7f43d.png',
-    '48_cabf201.png',
-    '49_31b4514.png',
-    '15_47c47e3.png',
-    '16_5149105.png',
-    '17_6dac3bd.png',
-    '18_061ddaf.png',
-    '19_641febd.png',
-    '1_2058a2b.png',
-    '20_4f81b9b.png',
-    '22_da029aa.png',
-    '23_034e7e8.png',
-    '24_60b405b.png',
-    '25_c0f0200.png',
-    '26_335bb13.png',
-    '27_b478ad5.png',
-    '28_03e8c6f.png',
-    '29_fef0d05.png',
-    '2_1ee2e6c.png',
-    '30_af2896e.png',
-    '31_3f91ebd.png',
-    '32_88c4f11.png',
-    '33_edd4f7d.png',
-    '34_38d61ac.png',
-    '36_f619572.png',
-    '37_a025f92.png',
-    '38_377dd47.png',
-    '39_31f5eb1.png',
-    '3_8dde7c4.png',
-    '40_538e40e.png',
-    '41_d07ef7b.png',
-    '42_d3d3f41.png',
-    '43_ec8008a.png',
-    '44_7d907d8.png',
-    '45_a38abb2.png',
-    '46_95eaf9d.png',
-    '47_1e7f43d.png',
-    '48_cabf201.png',
-    '49_31b4514.png',
-    '15_47c47e3.png',
-    '16_5149105.png',
-    '17_6dac3bd.png',
-    '18_061ddaf.png',
-    '19_641febd.png',
-    '1_2058a2b.png',
-    '20_4f81b9b.png',
-    '22_da029aa.png',
-    '23_034e7e8.png',
-    '24_60b405b.png',
-    '25_c0f0200.png',
-    '26_335bb13.png',
-    '27_b478ad5.png',
-    '28_03e8c6f.png',
-    '29_fef0d05.png',
-    '2_1ee2e6c.png',
-    '30_af2896e.png',
-    '31_3f91ebd.png',
-    '32_88c4f11.png',
-    '33_edd4f7d.png',
-    '34_38d61ac.png',
-    '36_f619572.png',
-    '37_a025f92.png',
-    '38_377dd47.png',
-    '39_31f5eb1.png',
-    '3_8dde7c4.png',
-    '40_538e40e.png',
-    '41_d07ef7b.png',
-    '42_d3d3f41.png',
-    '43_ec8008a.png',
-    '44_7d907d8.png',
-    '45_a38abb2.png',
-    '46_95eaf9d.png',
-    '47_1e7f43d.png',
-    '48_cabf201.png',
-    '49_31b4514.png',
-    '8_3a9dd21.png',
-    '8_3a9dd21.png',
-    '8_3a9dd21.png',
-  ];
 
   let table = new Array();
   for (let i = 0; i < personArray.length; i++) {
     table[i] = new Object();
-    table[i].image = `/images/${personArray[i]}`;
+    table[i].image = `/images/${personArray[i].img}`;
     table[i].p_x = (i % 20) + 1;
+    table[i].title=personArray[i].courseName;
+    table[i].desc=personArray[i].desc;
     table[i].p_y = Math.floor(i / 20) + 1;
   }
 
@@ -165,7 +52,10 @@ export default function auditionAnimate() {
       element.addEventListener(
         'click',
         () => {
-          console.log(table[i].image);
+          var setItemEvent = new Event('getCourseDesc');
+          let courseItem={desc:table[i].desc,title:table[i].title}
+          localStorage.setItem('courseItem',JSON.stringify(courseItem));
+          window.dispatchEvent(setItemEvent);
         },
         false
       );
@@ -206,8 +96,6 @@ export default function auditionAnimate() {
     renderer.setSize(window.innerWidth, window.innerHeight - 100);
     renderer.domElement.style.position = 'absolute';
     let container = document.getElementById('container');
-    // container.addEventListener('mouseenter', ()=>speed=0.011,false);
-    // container.addEventListener('mouseleave', ()=>speed=0.008,false);
     container.appendChild(renderer.domElement);
 
     // 鼠标控制

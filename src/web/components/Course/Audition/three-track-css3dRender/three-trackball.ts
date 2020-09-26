@@ -10,10 +10,6 @@ const EPS = 0.000001;
 const LAST_POSITION = new THREE.Vector3();
 const LAST_ZOOM = { value: 1 };
 
-// type tCamera = (THREE.PerspectiveCamera | THREE.OrthographicCamera) & {
-//     isPerspectiveCamera:boolean;
-//     isOrthographicCamera:boolean;
-// }
 
 export default class TrackballControls extends THREE.EventDispatcher {
   camera: THREE.PerspectiveCamera | THREE.OrthographicCamera;

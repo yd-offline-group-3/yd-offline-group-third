@@ -5,11 +5,10 @@ import {
 import Loading from '@components/Loading';
 import Home from '@components/Home';
 import NotFound from '@components/NotFound';
-// import { string } from "prop-types";
 const { lazy, Suspense } = React;
 
 const AboutUs = lazy(() => import(/* webpackChunkName:"AboutUs" */ '@pages/AboutUs'));
-const Audition = lazy(() => import(/* webpackChunkName:"Audition" */ '@components/Course/Audition'));
+const Audition = lazy(() => import(/* webpackChunkName:"Audition" */ '@components/Course/'));
 const Cooperation = lazy(() => import(/* webpackChunkName:"Cooperation" */ '@components/Cooperation'));
 const MyDoole = lazy(() => import(/* webpackChunkName:"MyDoole" */ '@components/Cooperation/cssdoodle'));
 interface YDProps extends RouteProps {
@@ -28,18 +27,13 @@ export const routes: YDProps[] = [
     component: AboutUs,
   },
   {
-    path: '/course/audition',
-    exact: true,
-    component: Audition,
-  },
-  {
     path: '/Cooperation',
     exact: true,
     component: AboutUs,
     
   },
   {
-    path: '/course/audition',
+    path: '/course',
     exact: true,
     component: Audition,
   }
@@ -59,12 +53,9 @@ const Routes = (token: string) => (
             key={index}
             path={path}
             exact={exact}
-            // eslint-disable-next-line no-nested-ternary
             render={(props) => (!r.auth ? (
-              // eslint-disable-next-line react/jsx-props-no-spreading
               <LazyCom {...props} />
             ) : token ? (
-              // eslint-disable-next-line react/jsx-props-no-spreading
               <LazyCom {...props} />
             ) : (
                   <Redirect
