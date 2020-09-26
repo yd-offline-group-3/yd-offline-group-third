@@ -1,0 +1,15 @@
+.course-list_container{
+    position:absolute;
+    right:35px;
+    top:100px;
+    color:#ffffff;
+    width:270px;
+    & a{
+        color:yellow;
+    }
+}
+
+
+.dis-show{
+  display:none;
+}

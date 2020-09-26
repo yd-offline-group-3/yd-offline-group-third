@@ -1,0 +1,5 @@
+.components-Audition {
+    height:100vh;
+    overflow:hidden;
+    background-image: radial-gradient(rgb(190, 168, 63), rgb(216, 158, 87), rgb(236, 151, 105));
+}

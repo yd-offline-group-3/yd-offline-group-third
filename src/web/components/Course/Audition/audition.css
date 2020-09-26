@@ -1,0 +1,18 @@
+
+#container .element {
+    width     : 100px;
+    height    : 100px;
+    text-align: center;
+    cursor    : pointer;
+
+    &:hover {
+        box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.75);
+        border    : 1px solid rgba(127, 255, 255, 0.75);
+    }
+
+    & img {
+        width : 100px;
+        height: 100px;
+    }
+
+}
