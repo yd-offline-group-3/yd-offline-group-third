@@ -46,9 +46,6 @@ export default function auditionAnimate() {
     '47_1e7f43d.png',
     '48_cabf201.png',
     '49_31b4514.png',
-    '0_ebefec4.png',
-    '12_464555f.png',
-    '13_f4dafcd.png',
     '15_47c47e3.png',
     '16_5149105.png',
     '17_6dac3bd.png',
@@ -85,9 +82,6 @@ export default function auditionAnimate() {
     '47_1e7f43d.png',
     '48_cabf201.png',
     '49_31b4514.png',
-    '0_ebefec4.png',
-    '12_464555f.png',
-    '13_f4dafcd.png',
     '15_47c47e3.png',
     '16_5149105.png',
     '17_6dac3bd.png',
@@ -271,7 +265,6 @@ export default function auditionAnimate() {
     // 让场景通过x轴或者y轴旋转  & z
     // scene.rotation.x += 0.011;
     scene.rotation.y += speed;
-
     requestAnimationFrame(animate);
 
     TWEEN.update(undefined);
@@ -281,7 +274,6 @@ export default function auditionAnimate() {
     // 渲染循环
     render();
   }
-
   function render() {
     renderer.render(scene, camera);
   }
